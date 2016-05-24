@@ -5,11 +5,11 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import com.example.main.application.StackRXApp;
+import com.example.stackrx.services.questions.service.StackExchangeService;
 
 import javax.inject.Inject;
 
 import dagger.Lazy;
-import com.example.stackrx.services.questions.service.StackExchangeService;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 

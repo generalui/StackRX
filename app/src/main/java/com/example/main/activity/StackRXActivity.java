@@ -6,12 +6,12 @@ import android.support.v4.widget.DrawerLayout;
 
 import com.example.injection.module.FragmentModule;
 import com.example.main.application.StackRXApp;
+import com.example.stackrx.R;
 
 import javax.inject.Inject;
 
-import butterknife.ButterKnife;
 import butterknife.BindView;
-import com.example.stackrx.R;
+import butterknife.ButterKnife;
 
 public class StackRXActivity extends Activity {
 

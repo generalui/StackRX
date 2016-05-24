@@ -8,11 +8,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.stackrx.R;
+import com.example.stackrx.services.questions.model.QuestionItem;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.stackrx.R;
-import com.example.stackrx.services.questions.model.QuestionItem;
 import rx.Observable;
 import rx.subjects.PublishSubject;
 

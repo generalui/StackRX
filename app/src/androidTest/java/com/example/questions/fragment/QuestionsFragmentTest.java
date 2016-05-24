@@ -10,6 +10,9 @@ import com.example.main.activity.StackRXActivity;
 import com.example.main.application.StackRXApp;
 import com.example.main.fragment.QuestionsFragment;
 import com.example.main.fragment.StackRXBaseFragment;
+import com.example.stackrx.R;
+import com.example.stackrx.services.questions.model.Questions;
+import com.example.stackrx.services.questions.service.StackExchangeService;
 
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -20,9 +23,6 @@ import javax.inject.Singleton;
 import dagger.Component;
 import dagger.Module;
 import dagger.Provides;
-import com.example.stackrx.R;
-import com.example.stackrx.services.questions.model.Questions;
-import com.example.stackrx.services.questions.service.StackExchangeService;
 import rx.Observable;
 
 import static org.mockito.Mockito.never;
