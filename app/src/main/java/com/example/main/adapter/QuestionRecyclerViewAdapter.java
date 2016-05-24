@@ -57,24 +57,24 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int i) {
         ItemHolder itemHolder = (ItemHolder) viewHolder;
-        itemHolder._questionText.setText(mQuestionItems.get(i).getTitle());
+        itemHolder.mQuestionText.setText(mQuestionItems.get(i).getTitle());
         final QuestionItem item = mQuestionItems.get(i);
         String answerBtnTxt = String.format(itemHolder.itemView.getContext().getString(R.string.item_question_view_answers),
                 item.getAnswerCount());
-        itemHolder._viewAnswersButton.setOnClickListener(new View.OnClickListener() {
+        itemHolder.mViewAnswersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mItemClickPublishSubject.onNext(item);
             }
         });
-        itemHolder._viewAnswersButton.setText(answerBtnTxt);
+        itemHolder.mViewAnswersButton.setText(answerBtnTxt);
     }
 
     @Override
     public void onViewRecycled(RecyclerView.ViewHolder viewHolder) {
         super.onViewRecycled(viewHolder);
         ItemHolder itemHolder = (ItemHolder) viewHolder;
-        itemHolder._viewAnswersButton.setOnClickListener(null);
+        itemHolder.mViewAnswersButton.setOnClickListener(null);
     }
 
     //endregion
@@ -126,13 +126,13 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
     private static class ItemHolder extends RecyclerView.ViewHolder {
 
-        public TextView _questionText;
-        public Button _viewAnswersButton;
+        public TextView mQuestionText;
+        public Button mViewAnswersButton;
 
         private ItemHolder(View itemView) {
             super(itemView);
-            _questionText = (TextView) itemView.findViewById(R.id.item_question_question_text_view);
-            _viewAnswersButton = (Button) itemView.findViewById(R.id.item_question_view_answers_button);
+            mQuestionText = (TextView) itemView.findViewById(R.id.item_question_question_text_view);
+            mViewAnswersButton = (Button) itemView.findViewById(R.id.item_question_view_answers_button);
         }
     }
     //endregion
