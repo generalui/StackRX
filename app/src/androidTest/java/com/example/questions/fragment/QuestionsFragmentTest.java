@@ -4,7 +4,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.test.ActivityInstrumentationTestCase2;
 
-import com.example.injection.component.DeGraphComponent;
+import com.example.injection.component.ApplicationComponent;
 import com.example.main.activity.InitialFragment;
 import com.example.main.activity.StackRXActivity;
 import com.example.main.application.StackRXApp;
@@ -49,7 +49,7 @@ public class QuestionsFragmentTest extends ActivityInstrumentationTestCase2<Stac
 
         StackRXApp app = (StackRXApp) getInstrumentation().getTargetContext().getApplicationContext();
 
-        DeGraphComponent component = DaggerQuestionsFragmentTest_DeTestGraphComponent.builder()
+        ApplicationComponent component = DaggerQuestionsFragmentTest_TestApplicationComponent.builder()
                 .questionsFragmentTestModule(mQuestionsFragmentTestModule)
                 .build();
 
@@ -102,7 +102,7 @@ public class QuestionsFragmentTest extends ActivityInstrumentationTestCase2<Stac
 
     @Singleton
     @Component(modules = {QuestionsFragmentTestModule.class})
-    public interface DeTestGraphComponent extends DeGraphComponent {
+    public interface TestApplicationComponent extends ApplicationComponent {
     }
 
     @Module
