@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.example.main.adapter.QuestionRecyclerViewAdapter;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import com.example.stackrx.R;
 import com.example.stackrx.services.questions.model.QuestionItem;
 import com.example.stackrx.services.questions.model.Questions;
@@ -29,7 +29,7 @@ public class QuestionsFragment extends StackRXBaseFragment {
 
     //region INJECTED VIEWS ------------------------------------------------------------------------
 
-    @InjectView(R.id.question_fragment_question_recycler_view)
+    @BindView(R.id.question_fragment_question_recycler_view)
     RecyclerView mQuestionsRecyclerView;
 
     //endregion
@@ -65,7 +65,7 @@ public class QuestionsFragment extends StackRXBaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.questions_fragment, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
         return view;
     }
 

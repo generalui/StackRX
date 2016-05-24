@@ -10,7 +10,7 @@ import com.example.main.application.StackRXApp;
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import com.example.stackrx.R;
 
 public class StackRXActivity extends Activity {
@@ -26,7 +26,7 @@ public class StackRXActivity extends Activity {
 
     //region INJECTED VIEWS ------------------------------------------------------------------------
 
-    @InjectView(R.id.drawer_layout)
+    @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
 
     //endregion
@@ -46,7 +46,7 @@ public class StackRXActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stack_rx_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         StackRXApp.component().inject(this);
     }
 
