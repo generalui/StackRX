@@ -6,9 +6,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * Created by graemeharnish on 5/25/15.
- */
 public class QuestionsDAOTest extends TestCase {
 
     @Before
