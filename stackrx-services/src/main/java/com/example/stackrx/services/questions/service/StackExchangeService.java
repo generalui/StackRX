@@ -2,49 +2,38 @@ package com.example.stackrx.services.questions.service;
 
 
 import com.example.stackrx.services.questions.model.Questions;
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.internal.bind.DateTypeAdapter;
 
-import java.util.Date;
-
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
-import retrofit.converter.GsonConverter;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
+import rx.schedulers.Schedulers;
 
 public class StackExchangeService {
 
     private static final String ENDPOINT = "https://api.stackexchange.com";
 
-    private IStackExchangeService mStackExchangeService;
+    private final IStackExchangeService mStackExchangeService;
 
     public StackExchangeService() {
-        RequestInterceptor interceptor = new RequestInterceptor() {
-            @Override
-            public void intercept(RequestFacade request) {
-                request.addQueryParam("format", "json");
-                request.addHeader("Accept", "application/json");
-                request.addHeader("Content-Type", "application/json");
-            }
-        };
 
-        RestAdapter.Builder restAdapterBuilder = new RestAdapter.Builder();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
 
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                .registerTypeAdapter(Date.class, new DateTypeAdapter())
-                .create();
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .build();
 
-        restAdapterBuilder
-                .setEndpoint(ENDPOINT)
-                .setConverter(new GsonConverter(gson))
-                .setRequestInterceptor(interceptor)
-                .setLogLevel(RestAdapter.LogLevel.HEADERS_AND_ARGS);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(ENDPOINT)
+                .client(okHttpClient)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        RestAdapter restAdapter = restAdapterBuilder.build();
-        mStackExchangeService = restAdapter.create(IStackExchangeService.class);
+        mStackExchangeService = retrofit.create(IStackExchangeService.class);
     }
 
     /**
