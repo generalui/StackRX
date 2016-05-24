@@ -9,7 +9,6 @@ import com.example.injection.module.ServicesModule;
 
 public class StackRXApp extends Application {
 
-
     //region INJECTED CLASSES ----------------------------------------------------------------------
     //endregion
 
@@ -27,7 +26,7 @@ public class StackRXApp extends Application {
 
     //region FIELDS --------------------------------------------------------------------------------
 
-    private DeGraphComponent _component = null;
+    private DeGraphComponent mDeGraphComponent = null;
 
     //endregion
 
@@ -63,11 +62,11 @@ public class StackRXApp extends Application {
     //region LOCAL METHODS -------------------------------------------------------------------------
 
     /**
-     * Create the default dependency injection _component
+     * Create the default dependency injection mDeGraphComponent
      */
     public void buildComponentAndInject() {
-        // only set if not null to allow for injection _component implementation interface to be overridden
-        if (_component == null) {
+        // only set if not null to allow for injection mDeGraphComponent implementation interface to be overridden
+        if (mDeGraphComponent == null) {
             setComponent(DaggerDeComponent.builder()
                     .servicesModule(new ServicesModule(APP))
                     .fragmentModule(new FragmentModule())
@@ -85,12 +84,12 @@ public class StackRXApp extends Application {
     //region ACCESSORS -----------------------------------------------------------------------------
 
     /**
-     * Set the application dependency injection implementation _component
-     * @param component the _component to set
+     * Set the application dependency injection implementation mDeGraphComponent
+     * @param component the mDeGraphComponent to set
      * @see {http://google.github.io/dagger/api/latest/dagger/Component.html}
      */
     public void setComponent(DeGraphComponent component) {
-        this._component = component;
+        mDeGraphComponent = component;
     }
 
     //endregion
@@ -103,11 +102,11 @@ public class StackRXApp extends Application {
     //region CLASS METHODS -------------------------------------------------------------------------
 
     /**
-     * Get the application dependency injection implementation _component
-     * @return the _component
+     * Get the application dependency injection implementation mDeGraphComponent
+     * @return the mDeGraphComponent
      */
     public static DeGraphComponent component() {
-        return APP._component;
+        return APP.mDeGraphComponent;
     }
 
     //endregion
