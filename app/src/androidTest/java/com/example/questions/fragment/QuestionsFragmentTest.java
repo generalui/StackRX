@@ -20,9 +20,9 @@ import javax.inject.Singleton;
 import dagger.Component;
 import dagger.Module;
 import dagger.Provides;
-import example.com.stackrx.R;
-import example.com.stackrx.services.questions.model.Questions;
-import example.com.stackrx.services.questions.service.StackExchangeService;
+import com.example.stackrx.R;
+import com.example.stackrx.services.questions.model.Questions;
+import com.example.stackrx.services.questions.service.StackExchangeService;
 import rx.Observable;
 
 import static org.mockito.Mockito.never;

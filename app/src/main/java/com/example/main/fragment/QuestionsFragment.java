@@ -14,9 +14,9 @@ import com.example.main.adapter.QuestionRecyclerViewAdapter;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import example.com.stackrx.R;
-import example.com.stackrx.services.questions.model.QuestionItem;
-import example.com.stackrx.services.questions.model.Questions;
+import com.example.stackrx.R;
+import com.example.stackrx.services.questions.model.QuestionItem;
+import com.example.stackrx.services.questions.model.Questions;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;

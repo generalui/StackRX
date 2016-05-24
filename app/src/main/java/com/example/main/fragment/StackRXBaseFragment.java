@@ -9,7 +9,7 @@ import com.example.main.application.StackRXApp;
 import javax.inject.Inject;
 
 import dagger.Lazy;
-import example.com.stackrx.services.questions.service.StackExchangeService;
+import com.example.stackrx.services.questions.service.StackExchangeService;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 

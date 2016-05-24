@@ -6,7 +6,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "example.com.stackrx"
+        applicationId "com.example.stackrx"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1

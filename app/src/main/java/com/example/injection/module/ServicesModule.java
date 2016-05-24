@@ -10,7 +10,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import example.com.stackrx.services.questions.service.StackExchangeService;
+import com.example.stackrx.services.questions.service.StackExchangeService;
 
 @Module
 public class ServicesModule {

@@ -1,6 +1,6 @@
-package example.com.stackrx.services.questions.service;
+package com.example.stackrx.services.questions.service;
 
-import example.com.stackrx.services.questions.model.Questions;
+import com.example.stackrx.services.questions.model.Questions;
 import retrofit.http.GET;
 import rx.Observable;
 

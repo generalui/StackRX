@@ -11,7 +11,7 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import example.com.stackrx.R;
+import com.example.stackrx.R;
 
 public class StackRXActivity extends Activity {
 

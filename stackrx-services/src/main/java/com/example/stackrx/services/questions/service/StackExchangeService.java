@@ -1,4 +1,4 @@
-package example.com.stackrx.services.questions.service;
+package com.example.stackrx.services.questions.service;
 
 
 import com.google.gson.FieldNamingPolicy;
@@ -8,7 +8,7 @@ import com.google.gson.internal.bind.DateTypeAdapter;
 
 import java.util.Date;
 
-import example.com.stackrx.services.questions.model.Questions;
+import com.example.stackrx.services.questions.model.Questions;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
