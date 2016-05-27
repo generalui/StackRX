@@ -6,12 +6,12 @@ import android.support.v4.widget.DrawerLayout;
 
 import com.example.injection.module.FragmentModule;
 import com.example.main.application.StackRXApp;
+import com.example.stackrx.R;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
-import example.com.stackrx.R;
 
 public class StackRXActivity extends Activity {
 
@@ -19,15 +19,15 @@ public class StackRXActivity extends Activity {
     //region INJECTED CLASSES ----------------------------------------------------------------------
 
     @Inject
-    InitialFragment _initialFragment;
+    InitialFragment mInitialFragment;
 
     //endregion
 
 
     //region INJECTED VIEWS ------------------------------------------------------------------------
 
-    @InjectView(R.id.drawer_layout)
-    DrawerLayout _drawerLayout;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
 
     //endregion
 
@@ -46,7 +46,7 @@ public class StackRXActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stack_rx_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         StackRXApp.component().inject(this);
     }
 
@@ -55,11 +55,11 @@ public class StackRXActivity extends Activity {
         super.onResume();
 
         /**
-         *  _initialFragment is indirect: the purpose is to allow DI to change the initial fragment
+         *  mInitialFragment is indirect: the purpose is to allow DI to change the initial fragment
          * @see FragmentModule#provideFragmentCreator()
          */
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, _initialFragment.createInitialFragment())
+                .replace(R.id.container, mInitialFragment.createInitialFragment())
                 .commit();
     }
 

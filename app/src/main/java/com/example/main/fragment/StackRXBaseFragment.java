@@ -5,11 +5,11 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import com.example.main.application.StackRXApp;
+import com.example.stackrx.services.questions.service.StackExchangeService;
 
 import javax.inject.Inject;
 
 import dagger.Lazy;
-import example.com.stackrx.services.questions.service.StackExchangeService;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -19,10 +19,10 @@ public abstract class StackRXBaseFragment extends Fragment {
     //region INJECTED CLASSES ----------------------------------------------------------------------
 
     @Inject
-    Lazy<StackExchangeService> _lazyQuestionsDAO;
+    Lazy<StackExchangeService> mStackExchangeServiceLazy;
 
     @Inject
-    Lazy<ConnectivityManager> _lazyConnectivityManager;
+    Lazy<ConnectivityManager> mConnectivityManager;
 
     //endregion
 
@@ -37,7 +37,7 @@ public abstract class StackRXBaseFragment extends Fragment {
 
     //region FIELDS --------------------------------------------------------------------------------
 
-    private CompositeSubscription _compositeSubscription = new CompositeSubscription();
+    private CompositeSubscription mCompositeSubscription = new CompositeSubscription();
 
     //endregion
 
@@ -58,7 +58,7 @@ public abstract class StackRXBaseFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        _compositeSubscription.unsubscribe();
+        mCompositeSubscription.unsubscribe();
     }
 
     //endregion
@@ -88,7 +88,7 @@ public abstract class StackRXBaseFragment extends Fragment {
      * @param subscription the Subscription to add
      */
     public void addSubscription(Subscription subscription) {
-        _compositeSubscription.add(subscription);
+        mCompositeSubscription.add(subscription);
     }
 
     //endregion
@@ -101,11 +101,11 @@ public abstract class StackRXBaseFragment extends Fragment {
     //region ACCESSORS -----------------------------------------------------------------------------
 
     public StackExchangeService getQuestionsDAO() {
-        return _lazyQuestionsDAO.get();
+        return mStackExchangeServiceLazy.get();
     }
 
     public ConnectivityManager getConnectivityManager() {
-        return _lazyConnectivityManager.get();
+        return mConnectivityManager.get();
     }
 
     //endregion

@@ -1,7 +1,8 @@
-package example.com.stackrx.services.questions.service;
+package com.example.stackrx.services.questions.service;
 
-import example.com.stackrx.services.questions.model.Questions;
-import retrofit.http.GET;
+import com.example.stackrx.services.questions.model.Questions;
+
+import retrofit2.http.GET;
 import rx.Observable;
 
 public interface IStackExchangeService {

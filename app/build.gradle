@@ -6,7 +6,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "example.com.stackrx"
+        applicationId "com.example.stackrx"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1
@@ -30,7 +30,8 @@ dependencies {
     compile 'com.android.support:cardview-v7:22.2.0'
 
     /* View Injection */
-    compile 'com.jakewharton:butterknife:6.1.0'
+    compile 'com.jakewharton:butterknife:8.0.1'
+    apt 'com.jakewharton:butterknife-compiler:8.0.1'
 
     /* Dependency Injection / Dagger 2 */
     compile 'com.google.dagger:dagger:2.0.1'

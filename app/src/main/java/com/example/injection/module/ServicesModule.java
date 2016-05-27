@@ -10,20 +10,20 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import example.com.stackrx.services.questions.service.StackExchangeService;
+import com.example.stackrx.services.questions.service.StackExchangeService;
 
 @Module
 public class ServicesModule {
 
-    private final Application application;
+    private final Application mApplication;
 
     public ServicesModule(Application application) {
-        this.application = application;
+        mApplication = application;
     }
 
     @Provides
     Application provideApplication() {
-        return application;
+        return mApplication;
     }
 
     @Singleton
@@ -34,12 +34,12 @@ public class ServicesModule {
 
     @Provides
     SharedPreferences providePreferenceManager() {
-        return PreferenceManager.getDefaultSharedPreferences(application);
+        return PreferenceManager.getDefaultSharedPreferences(mApplication);
     }
 
     @Provides
     ConnectivityManager provideConnectivityManager() {
-        return (ConnectivityManager) application.getSystemService(Context.CONNECTIVITY_SERVICE);
+        return (ConnectivityManager) mApplication.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
 }

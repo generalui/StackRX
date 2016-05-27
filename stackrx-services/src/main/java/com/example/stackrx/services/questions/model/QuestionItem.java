@@ -1,5 +1,5 @@
 
-package example.com.stackrx.services.questions.model;
+package com.example.stackrx.services.questions.model;
 
 import com.google.gson.annotations.Expose;
 

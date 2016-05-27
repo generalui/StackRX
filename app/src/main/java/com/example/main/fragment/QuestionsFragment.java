@@ -11,12 +11,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.main.adapter.QuestionRecyclerViewAdapter;
+import com.example.stackrx.R;
+import com.example.stackrx.services.questions.model.QuestionItem;
+import com.example.stackrx.services.questions.model.Questions;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
-import example.com.stackrx.R;
-import example.com.stackrx.services.questions.model.QuestionItem;
-import example.com.stackrx.services.questions.model.Questions;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -29,8 +29,8 @@ public class QuestionsFragment extends StackRXBaseFragment {
 
     //region INJECTED VIEWS ------------------------------------------------------------------------
 
-    @InjectView(R.id.question_fragment_question_recycler_view)
-    RecyclerView _recyclerView;
+    @BindView(R.id.question_fragment_question_recycler_view)
+    RecyclerView mQuestionsRecyclerView;
 
     //endregion
 
@@ -41,9 +41,9 @@ public class QuestionsFragment extends StackRXBaseFragment {
 
     //region FIELDS --------------------------------------------------------------------------------
 
-    private Context _context;
+    private Context mContext;
 
-    private QuestionRecyclerViewAdapter _questionRecyclerViewAdapter;
+    private QuestionRecyclerViewAdapter mQuestionRecyclerViewAdapter;
 
     //endregion
 
@@ -58,14 +58,14 @@ public class QuestionsFragment extends StackRXBaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        _context = getActivity().getBaseContext();
-        _questionRecyclerViewAdapter = new QuestionRecyclerViewAdapter();
+        mContext = getActivity().getBaseContext();
+        mQuestionRecyclerViewAdapter = new QuestionRecyclerViewAdapter();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.questions_fragment, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -74,14 +74,14 @@ public class QuestionsFragment extends StackRXBaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Setup recycler view
-        LinearLayoutManager layoutManager = new LinearLayoutManager(_context);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
-        _recyclerView.setHasFixedSize(true);
-        _recyclerView.setLayoutManager(layoutManager);
-        _recyclerView.setAdapter(_questionRecyclerViewAdapter);
+        mQuestionsRecyclerView.setHasFixedSize(true);
+        mQuestionsRecyclerView.setLayoutManager(layoutManager);
+        mQuestionsRecyclerView.setAdapter(mQuestionRecyclerViewAdapter);
 
-        addSubscription(_questionRecyclerViewAdapter.getQuestionItemSelected()
+        addSubscription(mQuestionRecyclerViewAdapter.getQuestionItemSelected()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<QuestionItem>() {
                     @Override
@@ -100,8 +100,8 @@ public class QuestionsFragment extends StackRXBaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        _recyclerView.setAdapter(null);
-        _recyclerView.setLayoutManager(null);
+        mQuestionsRecyclerView.setAdapter(null);
+        mQuestionsRecyclerView.setLayoutManager(null);
     }
 
     //endregion
@@ -137,14 +137,14 @@ public class QuestionsFragment extends StackRXBaseFragment {
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(_context, _context.getString(R.string.service_error),
+                        Toast.makeText(mContext, mContext.getString(R.string.service_error),
                                 Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onNext(Questions questions) {
-                        _questionRecyclerViewAdapter.setItemList(questions.getItems());
-                        _questionRecyclerViewAdapter.notifyDataSetChanged();
+                        mQuestionRecyclerViewAdapter.setItemList(questions.getItems());
+                        mQuestionRecyclerViewAdapter.notifyDataSetChanged();
                     }
                 }));
     }
