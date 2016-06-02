@@ -12,12 +12,14 @@ import android.widget.Toast;
 
 import com.example.main.adapter.QuestionRecyclerViewAdapter;
 import com.example.stackrx.R;
+import com.example.stackrx.services.questions.model.Answers;
 import com.example.stackrx.services.questions.model.QuestionItem;
 import com.example.stackrx.services.questions.model.Questions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Observer;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 
@@ -124,6 +126,9 @@ public class QuestionsFragment extends StackRXBaseFragment {
     private void onQuestionItemSelected(QuestionItem item) {
         Log.i("TAG", "question item selected: " + item.getTitle());
         //todo: implement me
+
+        apiGetAnswers(String.valueOf(item.getQuestionId()));
+
     }
 
     private void apiGetQuestions() {
@@ -149,12 +154,45 @@ public class QuestionsFragment extends StackRXBaseFragment {
                 }));
     }
 
+
+    private void apiGetAnswers(String questionID) {
+        Subscription subscription = getQuestionsDAO().getAnswers(questionID)
+                .subscribe(new AnswersObserver());
+
+        addSubscription(subscription);
+    }
+
+
     //endregion
 
 
     //region ACCESSORS -----------------------------------------------------------------------------
     //endregion
 
+    //region OBSERVERS
+
+    private class AnswersObserver implements Observer<Answers> {
+        @Override
+        public void onCompleted() {
+
+        }
+
+        @Override
+        public void onError(Throwable e) {
+
+        }
+
+        @Override
+        public void onNext(Answers answers) {
+            if (answers.getItems().size() > 0) {
+                Log.i(this.getClass().getSimpleName(), answers.getItems().get(0).getTitle());
+            } else {
+                Log.i(this.getClass().getSimpleName(), "no answers");
+            }
+        }
+    }
+
+    //endregion
 
     //region INNER CLASSES -------------------------------------------------------------------------
     //endregion

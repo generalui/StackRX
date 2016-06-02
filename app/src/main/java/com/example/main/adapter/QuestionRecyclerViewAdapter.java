@@ -56,10 +56,10 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int position) {
         ItemHolder itemHolder = (ItemHolder) viewHolder;
-        itemHolder.mQuestionText.setText(mQuestionItems.get(i).getTitle());
-        final QuestionItem item = mQuestionItems.get(i);
+        itemHolder.mQuestionText.setText(mQuestionItems.get(position).getTitle());
+        final QuestionItem item = mQuestionItems.get(position);
         String answerBtnTxt = String.format(itemHolder.itemView.getContext().getString(R.string.item_question_view_answers),
                 item.getAnswerCount());
         itemHolder.mViewAnswersButton.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +92,7 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
 
     //region LISTENERS -----------------------------------------------------------------------------
+
     //endregion
 
 
