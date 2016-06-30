@@ -123,30 +123,34 @@ public class QuestionsFragment extends StackRXBaseFragment {
 
     private void onQuestionItemSelected(QuestionItem item) {
         Log.i("TAG", "question item selected: " + item.getTitle());
-        //todo: implement me
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, AnswersFragment.newInstance(item))
+                .addToBackStack(AnswersFragment.ANSWERS_FRAGMENT_BACKSTACK_ID)
+                .commit();
     }
 
     private void apiGetQuestions() {
-        addSubscription(getQuestionsDAO().getQuestions()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Questions>() {
-                    @Override
-                    public void onCompleted() {
+        addSubscription(
+                getStackExchangeDAO().getQuestions()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Observer<Questions>() {
+                            @Override
+                            public void onCompleted() {
 
-                    }
+                            }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        Toast.makeText(mContext, mContext.getString(R.string.service_error),
-                                Toast.LENGTH_SHORT).show();
-                    }
+                            @Override
+                            public void onError(Throwable e) {
+                                Toast.makeText(mContext, mContext.getString(R.string.service_error),
+                                        Toast.LENGTH_SHORT).show();
+                            }
 
-                    @Override
-                    public void onNext(Questions questions) {
-                        mQuestionRecyclerViewAdapter.setItemList(questions.getItems());
-                        mQuestionRecyclerViewAdapter.notifyDataSetChanged();
-                    }
-                }));
+                            @Override
+                            public void onNext(Questions questions) {
+                                mQuestionRecyclerViewAdapter.setItemList(questions.getItems());
+                                mQuestionRecyclerViewAdapter.notifyDataSetChanged();
+                            }
+                        }));
     }
 
     //endregion

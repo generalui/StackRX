@@ -1,7 +1,10 @@
 package com.example.stackrx.services.questions.service;
 
 
+import com.example.stackrx.services.questions.model.Answers;
 import com.example.stackrx.services.questions.model.Questions;
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.GsonBuilder;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -26,11 +29,14 @@ public class StackExchangeService {
                 .addInterceptor(loggingInterceptor)
                 .build();
 
+        GsonBuilder builder = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ENDPOINT)
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(builder.create()))
                 .build();
 
         mStackExchangeService = retrofit.create(IStackExchangeService.class);
@@ -43,5 +49,14 @@ public class StackExchangeService {
      */
     public Observable<Questions> getQuestions() {
         return mStackExchangeService.getQuestions();
+    }
+
+    /**
+     * GET list of answers
+     *
+     * @return List of answers
+     */
+    public Observable<Answers> getAnswers(int questionID) {
+        return mStackExchangeService.getAnswers(questionID);
     }
 }

@@ -100,7 +100,7 @@ public abstract class StackRXBaseFragment extends Fragment {
 
     //region ACCESSORS -----------------------------------------------------------------------------
 
-    public StackExchangeService getQuestionsDAO() {
+    public StackExchangeService getStackExchangeDAO() {
         return mStackExchangeServiceLazy.get();
     }
 
